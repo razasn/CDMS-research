@@ -1,0 +1,5 @@
+# ignore Windows temporary files
+~*
+
+# ignore python nb checkpoints
+.ipynb_checkpoints
