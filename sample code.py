@@ -10,18 +10,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from tslearn.clustering import TimeSeriesKMeans
-from tslearn.datasets import CachedDatasets
-from tslearn.preprocessing import TimeSeriesScalerMeanVariance, 
-    TimeSeriesResampler
+from tslearn.preprocessing import TimeSeriesScalerMeanVariance,TimeSeriesResampler
 
 with open('data.json') as json_file:  
     json_data = json.load(json_file)
 
 
 data = pd.DataFrame(json_data['data'])
-#data.loc[:, ['PAS1']]
-np.shape(['PAS1'])
-plt.plot(data['PAS1'][1])
+np.shape(['QIS1'])
+plt.plot(data['QIS1'][1])
 plt.show()
 
 
@@ -39,14 +36,10 @@ X_train= ts_dat
 
 seed = 0
 np.random.seed(seed)
-#X_train, y_train, X_test, y_test = CachedDatasets().load_dataset("Trace")
-#X_train = X_train[y_train < 4]  # Keep first 3 classes
+
 np.random.shuffle(X_train)
 
-# Keep only 50 time series
 X_train = TimeSeriesScalerMeanVariance().fit_transform(X_train)
-
-# Make time series shorter
 X_train = TimeSeriesResampler(sz=100).fit_transform(X_train)
 sz = X_train.shape[1]
 
